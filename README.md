@@ -3,7 +3,7 @@ Huffman compression/decompression
 
 Example:
 
-`d
+```d
 auto weights = [22, 12, 29, 6, 21, 9];
 auto alphabet = "abcdef"d;
 
@@ -34,4 +34,4 @@ assert(equal(
         encoding.decode(
             bits(0b00_100_100_01_01_00_01_01_1011_11).take(24).retro()), 
         "ebbaaeaafc"));
-`
+```
