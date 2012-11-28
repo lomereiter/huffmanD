@@ -77,17 +77,19 @@ unittest {
 }
 
 /// Stores information about Huffman encoding
-struct HuffmanEncoding(W, A) 
+struct HuffmanEncoding(W, A, Table = ulong[Unqual!(ElementType!A)]) 
     if (isRandomAccessRange!W && isRandomAccessRange!A &&
         __traits(compiles, { W weights;
                              bool b = weights.front < weights.front + weights.front; 
-                             ulong[ElementType!A] table; }))
+                             Table table;
+                             A alphabet;
+                             table[alphabet[0]] = 0; }))
 {
     private {
         alias HuffmanNode!(ElementType!W) Node;
         Node* _root;
         A _alphabet;
-        ulong[ElementType!A] _codes; // code = (length << 58) + (...c_n ... c0)
+        Table _codes; // code = (length << 58) + (...c_n ... c0)
     }
 
     alias ElementType!A Character;
